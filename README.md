@@ -1,69 +1,72 @@
-# React + TypeScript + Vite
+# ✅ Checklist Onboarding - Frontend React - Azzikra Ramadhanti Aksan
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## 📌 Latar Belakang
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+AlurKerja adalah platform SaaS yang membantu perusahaan membuat, mendokumentasikan, dan menjalankan SOP secara digital menggunakan BPMN. Modul **Checklist Onboarding** ini dibuat untuk mendukung proses onboarding pengguna baru secara lebih efisien dan terstruktur.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📸 UI Preview
+<img src="dashboard.png" alt="Vehicle Tracker Dashboard Preview" width="100%" />
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### 🖥️ Frontend
+- **React**
+- **Vite**
+- **TypeScript**
+- **Tailwind CSS**
+- **Axios** (untuk komunikasi dengan backend)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 🖧 Backend
+- **Laravel** (wajib dijalankan terlebih dahulu sebelum frontend)
+- **REST API** (komunikasi antara frontend dan backend)
+
+---
+
+## 📦 Fitur
+
+### 🔐 Autentikasi Pengguna
+- Login user berdasarkan email dan password
+- Penyimpanan token autentikasi
+
+### ✅ CRUD Checklist
+- User dapat:
+  - Menambahkan item checklist (misal: Submit KTP)
+  - Melihat list checklist miliknya
+  - Mengedit dan menghapus checklist
+
+- Setiap checklist memiliki:
+  - Judul (string)
+  - Status: "Belum Selesai" (🔴) / "Selesai" (🟢)
+  - Deadline (opsional)
+
+### 🔁 Tandai Checklist Selesai
+- User bisa menandai checklist sebagai "Selesai"
+- Status otomatis berubah warna berdasarkan kondisinya
+
+### 📊 Progress Checklist (Admin)
+- Admin dapat melihat semua checklist user
+- Checklist dapat difilter berdasarkan nama pengguna (jika tersedia dari data user checklist)
+
+---
+
+## ⚙️ Cara Menjalankan Project (Frontend)
+Pastikan backend Laravel sudah dijalankan terlebih dahulu di http://localhost:8000/api
+
+1. Clone Repository
+```bash
+git https://github.com/azzikraaksan/saas-fe.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Install Dependencie
+```bash
+npm install
+```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+3. Jalankan Aplikasi
+```bash
+npm run dev
 ```
