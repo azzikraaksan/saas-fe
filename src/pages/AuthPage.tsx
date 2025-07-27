@@ -11,25 +11,33 @@ export default function AuthPage() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const { data } = await axios.post(
-        "http://localhost:8000/api/login",
-        form
-      );
-      // simpan token dan flag login
-      localStorage.setItem("token", data.token);
+  e.preventDefault();
+  try {
+    const { data } = await axios.post("http://localhost:8000/api/login", form);
+
+    if (data && data.user_id && data.role) {
+      localStorage.setItem("user_id", data.user_id);
+      localStorage.setItem("role", data.role);
       localStorage.setItem("isLoggedIn", "true");
-      navigate("/dashboard");
-    } catch (err) {
-      alert("Login failed. Please check your credentials.");
+
+      if (data.role === "admin") {
+        navigate("/dashboard-admin");
+      } else {
+        navigate("/dashboard");
+      }
+    } else {
+      alert("Login berhasil tapi ID user atau role tidak ditemukan!");
     }
-  };
+  } catch (err) {
+    alert("Login failed. Please check your credentials.");
+    console.error("Login error:", err);
+  }
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-purple-100 to-pink-200">
       <div className="bg-white shadow-xl rounded-2xl flex overflow-hidden max-w-5xl w-full">
-        {/* Form Section */}
         <div className="flex-1 p-10 flex flex-col justify-center space-y-4">
           <img src="/images/logo.png" alt="" className="w-20" />
           <p className="text-sm text-gray-600">Welcome back !!!</p>
@@ -73,12 +81,8 @@ export default function AuthPage() {
           </p>
         </div>
 
-        {/* Illustration Section */}
         <div className="hidden md:block flex-1 bg-blue-100 rounded-l-3xl flex items-center justify-center p-8">
-          <img
-            src="/images/login.png"
-            alt="Login"
-          />
+          <img src="/images/login.png" alt="Login" />
         </div>
       </div>
     </div>
